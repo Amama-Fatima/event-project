@@ -5,6 +5,7 @@ import { NextAuthSessionProvider } from "@/lib/providers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { Toaster } from "react-hot-toast";
+import Header from "@/components/layout/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,8 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextAuthSessionProvider session={session}>
-          {children}
+          <Header />
+          <main>{children}</main>
           <Toaster />
         </NextAuthSessionProvider>
       </body>
