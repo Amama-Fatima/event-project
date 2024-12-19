@@ -4,6 +4,7 @@ import { Event } from "@/lib/types";
 import { getServerSession } from "next-auth";
 import fs from "fs";
 import path from "path";
+import { parse } from "csv-parse/sync";
 import Link from "next/link";
 import React from "react";
 
@@ -14,42 +15,28 @@ const MyEventsPage = async () => {
     return <div>Unauthorized</div>;
   }
 
-  const getUserEvents = (userId: string): Event[] => {
-    try {
-      const csvFilePath = path.join(process.cwd(), "data", "events.csv");
+  let userEvents: Event[] = [];
+  try {
+    const csvFilePath = path.join(process.cwd(), "data", "events.csv");
 
-      if (!fs.existsSync(csvFilePath)) {
-        return [];
-      }
-
-      const fileContent = fs.readFileSync(csvFilePath, "utf-8");
-
-      const lines = fileContent
-        .split("\n")
-        .filter((line) => line.trim() !== "");
-
-      const headers = lines[0].split(",");
-
-      const events = lines
-        .slice(1) // Skip header row
-        .map((line) => {
-          const values = line.split(",");
-          return headers.reduce((obj, header, index) => {
-            obj[header.trim()] = values[index]?.trim() || "";
-            return obj;
-          }, {} as Record<string, string>) as Event;
-        })
-        .filter((event) => event.user_id === userId);
-
-      return events;
-    } catch (error) {
-      console.error("Error reading events:", error);
+    if (!fs.existsSync(csvFilePath)) {
       return [];
     }
-  };
 
-  const myEvents: Event[] = getUserEvents(userId);
-  console.log(myEvents);
+    const fileContent = fs.readFileSync(csvFilePath, "utf-8");
+
+    // Parse the CSV file
+    const records: Event[] = parse(fileContent, {
+      columns: true, // Automatically use the first row as headers
+      skip_empty_lines: true, // Ignore empty lines
+    });
+
+    // Filter records by userId
+    userEvents = records.filter((event) => event.user_id === userId);
+  } catch (error) {
+    console.error("Error reading events:", error);
+    return [];
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -59,7 +46,7 @@ const MyEventsPage = async () => {
       >
         Create Event
       </Link>
-      <EventsTable events={myEvents} />
+      <EventsTable events={userEvents} />
     </div>
   );
 };

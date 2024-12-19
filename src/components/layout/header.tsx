@@ -14,7 +14,7 @@ const Header = () => {
           {/* Navigation */}
           <nav className="flex items-center space-x-8">
             <Link
-              href="/events"
+              href="/my-events"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               My Events

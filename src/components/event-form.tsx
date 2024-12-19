@@ -8,13 +8,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import "react-day-picker/style.css";
 
 import { cn } from "@/lib/utils";
 import { DayPicker } from "react-day-picker";
 import TimePicker from "./ui/time-picker";
-import { TimeValue } from "@/lib/types";
+import { DefaultFormValues, TimeValue } from "@/lib/types";
 import {
   Select,
   SelectContent,
@@ -25,42 +25,35 @@ import {
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-const AddEventForm = () => {
+type EventFormProps = {
+  defaultValues: DefaultFormValues;
+  onSubmit: (data: EventSchemaType, userId: string, eventId: string) => void;
+  buttonText: string;
+  eventId?: string;
+};
+
+const EventForm = ({
+  defaultValues,
+  onSubmit,
+  buttonText,
+  eventId = "0",
+}: EventFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const form = useForm<EventSchemaType>({
     resolver: zodResolver(EventSchema),
-    defaultValues: {
-      name: "",
-      location: "",
-      date: undefined,
-      time: "",
-      address: "",
-      organizer_name: "",
-      event_type: "Conference",
-    },
+    defaultValues: defaultValues,
   });
 
-  const onsubmit: SubmitHandler<EventSchemaType> = async (data) => {
+  const onFormSubmit: SubmitHandler<EventSchemaType> = async (data) => {
     setIsLoading(true);
-    const body = {
-      eventData: data,
-      userId: session?.user?.id,
-    };
-    const response = await fetch("/api/add-event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-    if (response.ok) {
-      toast.success("Event added successfully");
-      console.log("Event added successfully");
-    } else {
-      toast.error("Failed to add event");
-      console.error("Failed to add event");
+    if (!session?.user?.id) {
+      toast.error("User not found");
+      return;
     }
+
+    onSubmit(data, session.user.id, eventId);
+
     setIsLoading(false);
   };
 
@@ -70,7 +63,7 @@ const AddEventForm = () => {
         <form
           action=""
           className="mx-auto grid w-full max-w-md gap-6 "
-          onSubmit={form.handleSubmit(onsubmit)}
+          onSubmit={form.handleSubmit(onFormSubmit)}
         >
           <div className="flex gap-2">
             <FormField
@@ -219,7 +212,11 @@ const AddEventForm = () => {
             )}
           />
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Adding Event..." : "Add Event"}
+            {isLoading ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              buttonText
+            )}
           </Button>
         </form>
       </Form>
@@ -227,4 +224,4 @@ const AddEventForm = () => {
   );
 };
 
-export default AddEventForm;
+export default EventForm;

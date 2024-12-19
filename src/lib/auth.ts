@@ -15,7 +15,7 @@ const EmailProvider = CredentialsProvider({
         if (!credentials?.email || !credentials?.password) {
             return null
         }
-
+        // TODO: refactor this code to follow the same methods used in my-events etc pages
         try {
             const csvFilePath = path.join(process.cwd(), "data", "users.csv");
 

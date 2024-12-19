@@ -15,3 +15,19 @@ export type Event = {
   event_type: string;
   user_id: string;
 };
+
+export type DefaultFormValues = {
+    name: string;
+    location: string;
+    date: Date | undefined;
+    time: string;
+    address: string;
+    organizer_name: string;
+    event_type:
+      | "Conference"
+      | "Meeting"
+      | "Dining"
+      | "Studying"
+      | "Working"
+      | "Other";
+  };
