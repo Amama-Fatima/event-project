@@ -5,7 +5,10 @@ export const EventType = ['Conference', 'Meeting', 'Dining', 'Studying', 'Workin
 export const EventSchema = z.object({
     name: z.string().nonempty(),
     location: z.string().nonempty(),
-    date: z.date(),
+    date: z.union([
+        z.date(),
+        z.string().transform((str) => new Date(str))
+    ]),
     time: z.string().nonempty(),
     address: z.string().nonempty(),
     organizer_name: z.string().nonempty(),

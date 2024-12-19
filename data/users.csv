@@ -1,4 +1,5 @@
 id,email,password
 1,johndoe@example.com,password123
 2,janedoe@example.com,securepass456
-3,bobsmith@example.com,mysecret7894,amama@gmail.com,12345
+3,bobsmith@example.com,mysecret7894
+4,amama@gmail.com,12345

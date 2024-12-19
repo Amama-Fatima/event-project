@@ -6,7 +6,7 @@ const AddEventPage = () => {
     <div>
       <PageDescriptionHeader
         title="Add Event"
-        description="Create a new exciting event!"
+        description="Create an exciting new event!"
       />
       <AddEventForm />
     </div>

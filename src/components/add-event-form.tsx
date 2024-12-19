@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EventSchema, EventSchemaType, EventType } from "@/lib/schema";
@@ -22,8 +22,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const AddEventForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = useSession();
   const form = useForm<EventSchemaType>({
     resolver: zodResolver(EventSchema),
     defaultValues: {
@@ -37,8 +41,27 @@ const AddEventForm = () => {
     },
   });
 
-  const onsubmit: SubmitHandler<EventSchemaType> = (data) => {
-    console.log(data);
+  const onsubmit: SubmitHandler<EventSchemaType> = async (data) => {
+    setIsLoading(true);
+    const body = {
+      eventData: data,
+      userId: session?.user?.id,
+    };
+    const response = await fetch("/api/add-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    if (response.ok) {
+      toast.success("Event added successfully");
+      console.log("Event added successfully");
+    } else {
+      toast.error("Failed to add event");
+      console.error("Failed to add event");
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -156,22 +179,6 @@ const AddEventForm = () => {
                 };
               };
 
-              // const formatTimeValue = (timeValue: TimeValue): string => {
-              //   console.log("Formatting time value", timeValue);
-              //   if (!timeValue.hour || !timeValue.minute || !timeValue.period) {
-              //     return "";
-              //   }
-              //   const obj = `${timeValue.hour.padStart(
-              //     2,
-              //     "0"
-              //   )}:${timeValue.minute.padStart(2, "0")} ${timeValue.period}`;
-              //   console.log("Formatted time value", obj);
-              //   return `${timeValue.hour.padStart(
-              //     2,
-              //     "0"
-              //   )}:${timeValue.minute.padStart(2, "0")} ${timeValue.period}`;
-              // };
-
               return (
                 <FormItem>
                   <FormLabel>Event Time</FormLabel>
@@ -211,8 +218,8 @@ const AddEventForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">
-            <span>Add Event</span>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Adding Event..." : "Add Event"}
           </Button>
         </form>
       </Form>
