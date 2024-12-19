@@ -8,7 +8,7 @@ import EventForm from "@/components/event-form";
 import { updateEvent } from "@/lib/helpers";
 
 type EditEventPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 const EditEvent = async ({ params }: EditEventPageProps) => {
