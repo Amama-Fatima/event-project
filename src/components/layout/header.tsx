@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import AuthButton from "../auth-buttons/auth-button";
 
 const Header = () => {
   return (
@@ -25,10 +25,10 @@ const Header = () => {
                 </span>
               </Link>
 
-              <Button className="relative group overflow-hidden bg-transparent hover:text-white transition-colors border-0">
+              {/* <Button className="relative group overflow-hidden bg-transparent hover:text-white transition-colors border-0">
                 <span className="absolute inset-0 bg-gradient-to-r from-[#8678F9]/80 to-purple-600/80 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative">Logout</span>
-              </Button>
+              </Button> */}
+              <AuthButton />
             </nav>
           </div>
         </div>
