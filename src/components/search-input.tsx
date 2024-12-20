@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { useSearchStore } from "@/lib/store";
 
 const SearchInput = () => {
   const divRef = useRef<HTMLInputElement>(null);
@@ -10,6 +11,8 @@ const SearchInput = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+
+  const eventType = useSearchStore((state) => state.eventType);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLInputElement>) => {
     if (!divRef.current || isFocused) return;
@@ -36,6 +39,14 @@ const SearchInput = () => {
 
   const handleMouseLeave = () => {
     setOpacity(0);
+  };
+
+  const getSearchUrl = () => {
+    const baseUrl = `/${searchValue}`;
+    if (eventType) {
+      return `${baseUrl}?type=${eventType}`;
+    }
+    return baseUrl;
   };
 
   return (
@@ -74,7 +85,7 @@ const SearchInput = () => {
 
       <Link
         className="h-12 px-6 flex justify-center items-center bg-gray-950 border rounded-md border-gray-800 hover:border-[#8678F9] transition-all duration-500 hover:bg-gray-900"
-        href={`/${searchValue}`}
+        href={getSearchUrl()}
       >
         <Search className="w-5 h-5 text-foreground text-center" />
       </Link>
