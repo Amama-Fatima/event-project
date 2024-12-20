@@ -1,3 +1,16 @@
 id,name,location,date,time,address,organizer_name,event_type,user_id
 1,Tech Conference 2024,Convention Center,2024-12-24,07:40 PM,123 Main St  City,Noor Fatima,Working,4
 2,Google Developers,XYZ Hall,2025-01-15,10:45 AM,321 Downtown,Amama Fatima,Meeting,4
+3,Startup Pitch Day,Tech Park,2025-02-10,02:30 PM,456 Innovation Ave,John Doe,Networking,5
+4,AI Workshop,Innovation Hub,2025-03-05,09:00 AM,789 AI St,Jane Smith,Workshop,6
+5,Digital Marketing Summit,Grand Hotel,2024-11-20,11:00 AM,987 Business Rd,Ali Khan,Conference,4
+6,Health Tech Expo,Convention Center,2025-04-12,03:00 PM,654 Medical Plaza,Sara Ahmed,Expo,7
+7,Coding Hackathon,University Hall,2025-01-25,08:00 AM,789 Campus Blvd,Fahad Iqbal,Hackathon,8
+8,Product Design Meetup,Design Studio,2025-02-14,05:00 PM,321 Creative Lane,Ayesha Khan,Meetup,4
+9,Tech Innovators Meetup,Tech Lounge,2024-12-30,07:00 PM,159 Future St,Michael Brown,Meetup,9
+10,Women in Tech,City Hall,2025-03-08,06:00 PM,111 Equality St,Mehwish Ali,Panel,10
+11,Startup Fundraising,Virtual Event,2025-01-20,03:00 PM,Online,Farah Hussain,Webinar,5
+12,Open Source Festival,Tech Hub,2025-02-18,12:00 PM,789 Code St,Zara Khalid,Festival,7
+13,Blockchain Seminar,Metro Hall,2025-03-12,01:00 PM,256 Crypto Lane,Hassan Raza,Seminar,8
+14,Robotics Fair,Tech High School,2025-04-20,10:00 AM,123 Robot Ave,Nida Khan,Expo,9
+15,JavaScript Conference,City Convention,2025-05-10,09:00 AM,555 Developer Lane,Adam Smith,Conference,4

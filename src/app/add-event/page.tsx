@@ -14,7 +14,7 @@ const AddEventPage = () => {
     event_type: "Conference",
   };
   return (
-    <div>
+    <section className="container mt-6 p-6">
       <PageDescriptionHeader
         title="Add Event"
         description="Create an exciting new event!"
@@ -24,7 +24,7 @@ const AddEventPage = () => {
         onSubmit={addEvent}
         buttonText="Add Event"
       />
-    </div>
+    </section>
   );
 };
 
