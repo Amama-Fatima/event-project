@@ -18,11 +18,11 @@ const EventCard = ({ event }: EventCardProps) => {
 
   return (
     <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-50 transition-all duration-500" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#8678F9] to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-50 transition-all duration-500" />
 
-      <Card className="relative bg-black p-6 rounded-lg border-0 flex flex-col gap-4">
+      <Card className="relative p-6 rounded-lg border-0 flex flex-col gap-4">
         <div className="absolute top-4 right-4">
-          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-pink-600 to-purple-600">
+          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gradient-to-r from-[#8678F9] to-purple-600 text-white">
             {event.event_type}
           </span>
         </div>
@@ -31,7 +31,7 @@ const EventCard = ({ event }: EventCardProps) => {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-pink-500" />
+            <Calendar className="w-4 h-4 text-[#8678F9]" />
             <span className="text-muted-foreground">
               {formatDate(event.date)}
             </span>
@@ -43,7 +43,7 @@ const EventCard = ({ event }: EventCardProps) => {
           </div>
 
           <div className="flex items-center gap-2 col-span-2">
-            <MapPin className="w-4 h-4 text-pink-500" />
+            <MapPin className="w-4 h-4 text-[#8678F9]" />
             <span className="text-foreground">{event.location}</span>
           </div>
 
