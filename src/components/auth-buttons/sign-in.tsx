@@ -41,7 +41,7 @@ const SignIn = () => {
           spanClassName="px-4 rounded-md flex items-center space-x-2"
           className="rounded-md"
         >
-          <span>Sign In</span>
+          <span className="hidden md:block">Sign In</span>
           <LogIn />
         </GradientButton>
       </DialogTrigger>

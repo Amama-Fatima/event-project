@@ -15,7 +15,7 @@ const LogOut = () => {
       spanClassName="px-4 rounded-md flex items-center space-x-2"
       className="rounded-md"
     >
-      <span>Log Out</span>
+      <span className="hidden md:block">Log Out</span>
       <LogOutIcon />
     </GradientButton>
   );
