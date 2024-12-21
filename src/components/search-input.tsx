@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useSearchStore } from "@/lib/store";
+// import { useSearchStore } from "@/lib/store";
 
 const SearchInput = () => {
   const divRef = useRef<HTMLInputElement>(null);
@@ -11,7 +11,7 @@ const SearchInput = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-  const { resetEventName, resetDateFilter, resetEventType } = useSearchStore();
+  // const { resetEventName, resetDateFilter, resetEventType } = useSearchStore();
 
   // const eventType = useSearchStore((state) => state.eventType);
 
@@ -43,9 +43,9 @@ const SearchInput = () => {
   };
 
   const getSearchUrl = () => {
-    resetEventName();
-    resetDateFilter();
-    resetEventType();
+    // resetEventName();
+    // resetDateFilter();
+    // resetEventType();
     const baseUrl = `/${searchValue}`;
     // if (eventType) {
     //   return `${baseUrl}?type=${eventType}`;
