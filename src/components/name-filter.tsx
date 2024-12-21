@@ -24,6 +24,7 @@ const NameFilter = () => {
     const newURL = searchParams.toString()
       ? `${url.pathname}?${searchParams.toString()}`
       : url.pathname;
+    console.log("new url is ", newURL);
 
     router.push(newURL);
   };
