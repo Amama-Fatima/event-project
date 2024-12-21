@@ -6,20 +6,19 @@ import { Event } from "@/lib/types";
 import PageDescriptionHeader from "@/components/layout/heading";
 import EventCard from "@/components/event-card";
 import EventTypeFilter from "@/components/event-type-filter";
+import DateFilter from "@/components/date-filter";
 
 type EventInCityPage = {
   params: Promise<{ name: string }>;
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ type?: string; date?: string }>;
 };
 
 const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
   const { name } = await params;
-  const { type: eventType } = await searchParams;
+  const { type: eventType, date: dateFilter } = await searchParams;
 
-  // Decode the name parameter from the URL
   const decodedName = decodeURIComponent(name);
 
-  // Read and filter events
   const csvFilePath = path.join(process.cwd(), "data", "events.csv");
   let filteredEvents: Event[] = [];
 
@@ -29,22 +28,26 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
     } else {
       const fileContent = fs.readFileSync(csvFilePath, "utf-8");
 
-      // Parse CSV content into Event objects
       const allEvents = parse(fileContent, {
         columns: true,
         skip_empty_lines: true,
       }) as Event[];
 
-      // Filter events based on both city and event type
+      // Filter events based on city, event type, and date
       filteredEvents = allEvents.filter((event) => {
         const cityMatch = event.address
           .toLowerCase()
           .includes(decodedName.toLowerCase());
 
-        // Only apply event type filter if it exists
         const typeMatch = !eventType || event.event_type === eventType;
 
-        return cityMatch && typeMatch;
+        let dateMatch = true;
+        if (dateFilter) {
+          const eventDate = event.date.split("T")[0];
+          dateMatch = eventDate === dateFilter;
+        }
+
+        return cityMatch && typeMatch && dateMatch;
       });
     }
   } catch (error) {
@@ -58,6 +61,7 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
         description="Check out the upcoming events!"
       />
       <EventTypeFilter />
+      <DateFilter />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredEvents.map((event, i) => (
           <EventCard key={i} event={event} />

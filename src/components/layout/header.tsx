@@ -1,8 +1,16 @@
 import Link from "next/link";
 import React from "react";
 import AuthButton from "../auth-buttons/auth-button";
+import { headers } from "next/headers";
+import HeaderSearchWrapper from "./header-search-wrapper";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-const Header = () => {
+const Header = async () => {
+  const session = await getServerSession(authOptions);
+  const headersList = await headers();
+  const pathname = headersList.get("x-url-pathname") || "/";
+  console.log(pathname);
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="backdrop-blur-md bg-background bg-opacity-50">
@@ -15,18 +23,21 @@ const Header = () => {
                 </span>
               </Link>
 
-              <Link
-                href="/my-events"
-                className="text-muted-foreground hover:text-foreground transition-colors relative group"
-              >
-                {/* <span className="relative"> */}
-                My Events
-                {/* <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-gradient-to-r from-[#8678F9]/80 via-purple-500 to-[#8678F9]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
-                {/* </span> */}
-              </Link>
+              {session?.user && (
+                <Link
+                  href="/my-events"
+                  className="text-muted-foreground hover:text-foreground transition-colors relative group"
+                >
+                  {/* <span className="relative"> */}
+                  My Events
+                  {/* <span className="absolute left-0 right-0 bottom-0 h-[2px] bg-gradient-to-r from-[#8678F9]/80 via-purple-500 to-[#8678F9]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
+                  {/* </span> */}
+                </Link>
+              )}
             </div>
 
-            <nav className="flex items-center">
+            <nav className="flex items-center gap-2">
+              <HeaderSearchWrapper />
               <AuthButton />
             </nav>
           </div>

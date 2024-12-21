@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { useSearchStore } from "@/lib/store";
 import { EventType } from "@/lib/types";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const eventTypes = [
   "Conference",
@@ -24,14 +24,22 @@ const eventTypes = [
 const EventTypeFilter = () => {
   const router = useRouter();
   const { eventType, setEventType, resetEventType } = useSearchStore();
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   const updateURL = (type: EventType | null) => {
-    const city = pathname.slice(1);
-    const baseUrl = window.location.origin;
+    // const city = pathname.slice(1);
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
 
-    const newURL =
-      type !== null ? `${baseUrl}/${city}?type=${type}` : `${baseUrl}/${city}`;
+    if (type) {
+      searchParams.set("type", type);
+    } else {
+      searchParams.delete("type");
+    }
+
+    const newURL = searchParams.toString()
+      ? `${url.pathname}?${searchParams.toString()}`
+      : url.pathname;
 
     router.push(newURL);
   };

@@ -33,8 +33,11 @@ export type DefaultFormValues = {
   export type  SearchState = {
     city: string
     eventType: EventType | null
+    dateFilter: Date | null
     setCity: (city: string) => void
     setEventType: (type: EventType | null) => void
+    setDateFilter: (date: Date) => void
     resetEventType: () => void
+    resetDateFilter: () => void
     reset: () => void
   }

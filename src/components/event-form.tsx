@@ -9,8 +9,6 @@ import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { CalendarIcon, Loader2 } from "lucide-react";
-import "react-day-picker/style.css";
-
 import { cn } from "@/lib/utils";
 import { DayPicker } from "react-day-picker";
 import TimePicker from "./ui/time-picker";
@@ -25,6 +23,7 @@ import {
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import GradientButton from "./gradient-button";
+import "react-day-picker/style.css";
 
 type EventFormProps = {
   defaultValues: DefaultFormValues;
