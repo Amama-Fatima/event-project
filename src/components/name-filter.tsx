@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
@@ -8,9 +8,11 @@ import { useSearchStore } from "@/lib/store";
 
 const NameFilter = () => {
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { eventName, setEventName, resetEventName } = useSearchStore();
 
   const updateURL = (name: string | null) => {
+    // Match the pattern used in other filters
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
 
@@ -18,13 +20,11 @@ const NameFilter = () => {
       searchParams.set("name", name.trim());
     } else {
       searchParams.delete("name");
-      resetEventName();
     }
 
     const newURL = searchParams.toString()
       ? `${url.pathname}?${searchParams.toString()}`
       : url.pathname;
-    console.log("new url is ", newURL);
 
     router.push(newURL);
   };
@@ -38,6 +38,14 @@ const NameFilter = () => {
     setEventName(newName);
     debouncedUpdateURL(newName);
   };
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const nameParam = url.searchParams.get("name");
+    if (nameParam && !eventName) {
+      setEventName(nameParam);
+    }
+  }, []);
 
   return (
     <Input
