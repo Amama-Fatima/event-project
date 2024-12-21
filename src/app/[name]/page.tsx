@@ -11,7 +11,7 @@ import NameFilter from "@/components/name-filter";
 
 type EventInCityPage = {
   params: Promise<{ name: string }>;
-  searchParams: Promise<{ type?: string; date?: string; name?: string }>;
+  searchParams: Promise<{ type?: string; date?: string; eventName?: string }>;
 };
 
 const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
@@ -19,7 +19,7 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
   const {
     type: eventType,
     date: dateFilter,
-    name: nameFilter,
+    eventName: nameFilter,
   } = await searchParams;
 
   console.log("name is filter is", nameFilter);

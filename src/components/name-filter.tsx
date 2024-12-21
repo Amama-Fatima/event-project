@@ -1,36 +1,43 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { useSearchStore } from "@/lib/store";
 
 const NameFilter = () => {
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { eventName, setEventName, resetEventName } = useSearchStore();
 
   const updateURL = (name: string | null) => {
-    // Match the pattern used in other filters
-    const url = new URL(window.location.href);
-    const searchParams = new URLSearchParams(url.search);
+    // Create new URLSearchParams from current params
+    const params = new URLSearchParams(searchParams.toString());
 
     if (name && name.trim()) {
-      searchParams.set("name", name.trim());
+      params.set("eventName", name.trim());
     } else {
-      searchParams.delete("name");
+      params.delete("eventName");
     }
 
-    const newURL = searchParams.toString()
-      ? `${url.pathname}?${searchParams.toString()}`
-      : url.pathname;
+    // Use pathname instead of window.location
+    const newURL = params.toString()
+      ? `${pathname}?${params.toString()}`
+      : pathname;
 
     router.push(newURL);
   };
 
   const debouncedUpdateURL = useDebouncedCallback((value: string) => {
-    updateURL(value || null);
+    if (!value || value.trim() === "") {
+      resetEventName();
+      updateURL(null);
+    } else {
+      setEventName(value);
+      updateURL(value);
+    }
   }, 300);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +46,9 @@ const NameFilter = () => {
     debouncedUpdateURL(newName);
   };
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const nameParam = url.searchParams.get("name");
+  // Initialize from URL params
+  React.useEffect(() => {
+    const nameParam = searchParams.get("eventName");
     if (nameParam && !eventName) {
       setEventName(nameParam);
     }
