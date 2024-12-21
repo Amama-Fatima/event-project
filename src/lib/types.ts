@@ -34,10 +34,13 @@ export type DefaultFormValues = {
     city: string
     eventType: EventType | null
     dateFilter: Date | null
+    eventName: string | null
     setCity: (city: string) => void
     setEventType: (type: EventType | null) => void
     setDateFilter: (date: Date) => void
+    setEventName: (name: string) => void
     resetEventType: () => void
     resetDateFilter: () => void
+    resetEventName: () => void
     reset: () => void
   }

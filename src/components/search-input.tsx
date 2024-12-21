@@ -11,8 +11,9 @@ const SearchInput = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const { resetEventName, resetDateFilter, resetEventType } = useSearchStore();
 
-  const eventType = useSearchStore((state) => state.eventType);
+  // const eventType = useSearchStore((state) => state.eventType);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLInputElement>) => {
     if (!divRef.current || isFocused) return;
@@ -42,10 +43,13 @@ const SearchInput = () => {
   };
 
   const getSearchUrl = () => {
+    resetEventName();
+    resetDateFilter();
+    resetEventType();
     const baseUrl = `/${searchValue}`;
-    if (eventType) {
-      return `${baseUrl}?type=${eventType}`;
-    }
+    // if (eventType) {
+    //   return `${baseUrl}?type=${eventType}`;
+    // }
     return baseUrl;
   };
 

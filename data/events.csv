@@ -1,18 +1,28 @@
 id,name,location,date,time,address,organizer_name,event_type,user_id
 1,Tech Conference 2024,Convention Center,2024-12-24,07:40 PM,123 Main St New York,Noor Fatima,Working,4
 2,Google Developers,XYZ Hall,2025-01-15,10:45 AM,321 Downtown New York,Amama Fatima,Meeting,4
-3,Startup Pitch Day,Tech Park,2025-02-10,02:30 PM,456 Innovation Ave New York,John Doe,Networking,5
-4,AI Workshop,Innovation Hub,2025-03-05,09:00 AM,789 AI St New York,Jane Smith,Workshop,6
+3,Startup Pitch Day,Tech Park,2025-02-10,02:30 PM,456 Innovation Ave New York,John Doe,Conference,5
+4,AI Workshop,Innovation Hub,2025-03-05,09:00 AM,789 AI St New York,Jane Smith,Studying,6
 5,Digital Marketing Summit,Grand Hotel,2024-11-20,11:00 AM,987 Business Rd New York,Ali Khan,Conference,4
-6,Health Tech Expo,Convention Center,2025-04-12,03:00 PM,654 Medical Plaza Los Angeles,Sara Ahmed,Expo,7
-7,Coding Hackathon,University Hall,2025-01-25,08:00 AM,789 Campus Blvd Los Angeles,Fahad Iqbal,Hackathon,8
-8,Product Design Meetup,Design Studio,2025-02-14,05:00 PM,321 Creative Lane Los Angeles,Ayesha Khan,Meetup,4
-9,Tech Innovators Meetup,Tech Lounge,2024-12-30,07:00 PM,159 Future St Los Angeles,Michael Brown,Meetup,2
-10,Women in Tech,City Hall,2025-03-08,06:00 PM,111 Equality St Los Angeles,Mehwish Ali,Panel,6
-11,Startup Fundraising,Virtual Event,2025-01-20,03:00 PM,Online Chicago,Farah Hussain,Webinar,5
-12,Open Source Festival,Tech Hub,2025-02-18,12:00 PM,789 Code St Chicago,Zara Khalid,Festival,7
-13,Blockchain Seminar,Metro Hall,2025-03-12,01:00 PM,256 Crypto Lane Chicago,Hassan Raza,Seminar,7
-14,Robotics Fair,Tech High School,2025-04-20,10:00 AM,123 Robot Ave Chicago,Nida Khan,Expo,2
-15,JavaScript Conference,City Convention,2025-05-10,09:00 AM,555 Developer Lane Chicago,Adam Smith,Conference,4
-16,iiiiiii,kkkkkkk,2024-12-24,11:50 PM,Chicago,aaaaaaa,Studying,4
-17,oooooooooooo,rrrrrrrrrrr,2024-12-23,09:05 AM,Chicago,bbbbbbbbbb,Conference,4
+6,NYC Team Meeting,Convention Center,2025-03-10,09:00 AM,123 Main St New York,Noor Fatima,Meeting,3
+7,Networking Lunch,Grand Hotel,2025-02-25,12:30 PM,987 Business Rd New York,Amama Fatima,Dining,8
+8,Design Thinking Workshop,Tech Park,2025-02-20,10:00 AM,456 Innovation Ave New York,Ayesha Khan,Studying,4
+9,NYC Office Day,Innovation Hub,2025-03-15,06:30 PM,789 AI St New York,Michael Brown,Working,2
+10,Healthcare Innovations,Medical Plaza,2025-04-12,03:00 PM,654 Medical Plaza Los Angeles,Sara Ahmed,Conference,7
+11,Mobile App Meetup,University Hall,2025-01-25,08:00 AM,789 Campus Blvd Los Angeles,Fahad Iqbal,Studying,8
+12,Product Design Meetup,Design Studio,2025-02-14,05:00 PM,321 Creative Lane Los Angeles,Ayesha Khan,Meeting,4
+13,Tech Innovators Meetup,Tech Lounge,2024-12-30,07:00 PM,159 Future St Los Angeles,Michael Brown,Meeting,2
+14,Women in Tech,City Hall,2025-03-08,06:00 PM,111 Equality St Los Angeles,Mehwish Ali,Conference,6
+15,Lunch and Learn,University Hall,2025-03-25,01:00 PM,789 Campus Blvd Los Angeles,Sara Ahmed,Dining,3
+16,Dev Bootcamp Study,University Hall,2025-01-30,03:00 PM,789 Campus Blvd Los Angeles,Fahad Iqbal,Studying,5
+17,Office Networking,Tech Lounge,2025-05-20,12:00 PM,159 Future St Los Angeles,Michael Brown,Other,4
+18,Female Founders Conference,City Hall,2025-03-09,02:00 PM,111 Equality St Los Angeles,Mehwish Ali,Conference,6
+19,Next.js Study Session,Tech Hub,2025-01-10,06:30 PM,789 Code St Chicago,Zara Khalid,Studying,1
+20,Startup Strategy Meeting,Virtual Event,2025-01-20,03:00 PM,Online Chicago,Farah Hussain,Meeting,5
+21,Open Source Workshop,Tech Hub,2025-02-18,12:00 PM,789 Code St Chicago,Zara Khalid,Studying,7
+22,Blockchain Networking Lunch,Metro Hall,2025-03-12,01:00 PM,256 Crypto Lane Chicago,Hassan Raza,Dining,7
+23,Robotics Office Day,Tech High School,2025-04-20,10:00 AM,123 Robot Ave Chicago,Nida Khan,Working,2
+24,JavaScript Study Group,City Convention,2025-05-10,09:00 AM,555 Developer Lane Chicago,Adam Smith,Studying,4
+25,Frontend Networking Lunch,City Convention,2025-04-15,12:00 PM,555 Developer Lane Chicago,Adam Smith,Dining,2
+26,Mobile App Meetup,Metro Hall,2025-02-15,09:00 AM,256 Crypto Lane Chicago,Hassan Raza,Meeting,7
+27,Office Day Meetup,Tech Hub,2025-03-22,11:30 AM,789 Code St Chicago,Zara Khalid,Working,3

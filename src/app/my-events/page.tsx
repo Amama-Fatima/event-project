@@ -9,6 +9,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import PageDescriptionHeader from "@/components/layout/heading";
 
 const MyEventsPage = async () => {
   const session = await getServerSession(authOptions);
@@ -42,6 +43,10 @@ const MyEventsPage = async () => {
 
   return (
     <div className="container mx-auto p-4 flex flex-col gap-4">
+      <PageDescriptionHeader
+        title="My Events"
+        description="Manage Your Events"
+      />
       <Link href="/add-event" className="self-end">
         <Button>
           Add Event

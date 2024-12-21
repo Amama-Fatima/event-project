@@ -7,15 +7,20 @@ import PageDescriptionHeader from "@/components/layout/heading";
 import EventCard from "@/components/event-card";
 import EventTypeFilter from "@/components/event-type-filter";
 import DateFilter from "@/components/date-filter";
+import NameFilter from "@/components/name-filter";
 
 type EventInCityPage = {
   params: Promise<{ name: string }>;
-  searchParams: Promise<{ type?: string; date?: string }>;
+  searchParams: Promise<{ type?: string; date?: string; name?: string }>;
 };
 
 const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
   const { name } = await params;
-  const { type: eventType, date: dateFilter } = await searchParams;
+  const {
+    type: eventType,
+    date: dateFilter,
+    name: nameFilter,
+  } = await searchParams;
 
   const decodedName = decodeURIComponent(name);
 
@@ -47,7 +52,14 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
           dateMatch = eventDate === dateFilter;
         }
 
-        return cityMatch && typeMatch && dateMatch;
+        let nameMatch = true;
+        if (nameFilter) {
+          nameMatch = event.name
+            .toLowerCase()
+            .includes(nameFilter.toLowerCase());
+        }
+
+        return cityMatch && typeMatch && dateMatch && nameMatch;
       });
     }
   } catch (error) {
@@ -60,8 +72,17 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
         title="Events"
         description="Check out the upcoming events!"
       />
-      <EventTypeFilter />
-      <DateFilter />
+      <div className="flex flex-col gap-2 self-end">
+        <h3>Filters</h3>
+        <div className="flex gap-2">
+          <EventTypeFilter />
+          <DateFilter />
+          <NameFilter />
+        </div>
+      </div>
+      {filteredEvents.length === 0 && (
+        <p className="text-foreground text-center">No events found</p>
+      )}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filteredEvents.map((event, i) => (
           <EventCard key={i} event={event} />

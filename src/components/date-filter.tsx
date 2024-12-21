@@ -72,7 +72,7 @@ const DateFilter = () => {
             selected={dateFilter || new Date()}
             onSelect={handleDateSelect}
           />
-          <Button variant={"ghost"} onClick={handleReset}>
+          <Button variant={"ghost"} onClick={handleReset} className="w-full">
             Reset
           </Button>
         </PopoverContent>

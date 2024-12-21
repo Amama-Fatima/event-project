@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Github } from "lucide-react";
 
 const Footer = () => {
@@ -14,27 +13,6 @@ const Footer = () => {
               © {new Date().getFullYear()} All rights reserved
             </span>
           </div>
-
-          <nav className="flex items-center gap-6">
-            <Link
-              href="/"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/"
-              className="text-sm text-foreground hover:text-muted-foreground transition-colors"
-            >
-              Terms
-            </Link>
-          </nav>
 
           <a
             href="https://github.com/Amama-Fatima/event-project"
