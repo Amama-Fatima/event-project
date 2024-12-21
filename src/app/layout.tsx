@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { Toaster } from "react-hot-toast";
 import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({
           <Header />
           <main className="flex-grow">{children}</main>
           <Toaster />
+          <Footer />
         </NextAuthSessionProvider>
       </body>
     </html>

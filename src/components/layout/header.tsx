@@ -5,13 +5,13 @@ import AuthButton from "../auth-buttons/auth-button";
 const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full">
-      <div className="backdrop-blur-md bg-black bg-opacity-50">
+      <div className="backdrop-blur-md bg-background bg-opacity-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-12">
               <Link href="/" className="font-bold text-xl relative group">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8678F9] to-purple-500">
-                  Logo
+                  EventCraft
                 </span>
               </Link>
 
