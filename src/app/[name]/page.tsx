@@ -22,6 +22,8 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
     name: nameFilter,
   } = await searchParams;
 
+  console.log("name is filter is", nameFilter);
+
   const decodedName = decodeURIComponent(name);
 
   const csvFilePath = path.join(process.cwd(), "data", "events.csv");
@@ -65,6 +67,8 @@ const EventInCityPage = async ({ params, searchParams }: EventInCityPage) => {
   } catch (error) {
     console.error("Error reading events:", error);
   }
+
+  console.log("filtered events", filteredEvents);
 
   return (
     <section className="container mt-6 p-6 flex flex-col gap-10">
