@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EventSchema, EventSchemaType, EventType } from "@/lib/schema";
@@ -24,6 +24,7 @@ import {
 } from "./ui/select";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import GradientButton from "./gradient-button";
 
 type EventFormProps = {
   defaultValues: DefaultFormValues;
@@ -46,16 +47,24 @@ const EventForm = ({
   });
 
   const onFormSubmit: SubmitHandler<EventSchemaType> = async (data) => {
-    setIsLoading(true);
-    if (!session?.user?.id) {
-      toast.error("User not found");
-      return;
+    try {
+      setIsLoading(true);
+      if (!session?.user?.id) {
+        toast.error("User not found");
+        return;
+      }
+
+      await onSubmit(data, session.user.id, eventId);
+    } catch {
+      toast.error("Something went wrong!");
+    } finally {
+      setIsLoading(false);
     }
-
-    onSubmit(data, session.user.id, eventId);
-
-    setIsLoading(false);
   };
+
+  useEffect(() => {
+    console.log("is loading is ", isLoading);
+  }, [isLoading]);
 
   return (
     <div>
@@ -166,18 +175,23 @@ const EventForm = ({
                 };
                 console.log("Parsed time string", obj);
                 return {
-                  hour: hour, // Keep as string
+                  hour: hour,
                   minute: minute,
                   period: period,
                 };
               };
+
+              const { hour, minute, period } = parseTimeString(field.value);
 
               return (
                 <FormItem>
                   <FormLabel>Event Time</FormLabel>
                   <FormControl>
                     <TimePicker
-                      value={parseTimeString(field.value)}
+                      // value={parseTimeString(field.value)}
+                      h={hour}
+                      m={minute}
+                      p={period}
                       onChange={(timeValue) => {
                         field.onChange(timeValue);
                       }}
@@ -194,7 +208,10 @@ const EventForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Event Type</FormLabel>
-                <Select onValueChange={field.onChange}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select Event Type" />
@@ -211,13 +228,13 @@ const EventForm = ({
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isLoading}>
+          <GradientButton type="submit" disabled={isLoading}>
             {isLoading ? (
               <Loader2 className="animate-spin" size={16} />
             ) : (
               buttonText
             )}
-          </Button>
+          </GradientButton>
         </form>
       </Form>
     </div>

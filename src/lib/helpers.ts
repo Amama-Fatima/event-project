@@ -20,6 +20,7 @@ export const addEvent = async (data: EventSchemaType, userId: string, eventId: s
   if (response.ok) {
     toast.success("Event added successfully");
     console.log("Event added successfully");
+    window.location.href = "/my-events";
   } else {
     toast.error("Failed to add event");
     console.error("Failed to add event");
@@ -42,6 +43,7 @@ export const updateEvent = async (data: EventSchemaType, userId: string, eventId
   if (response.ok) {
     toast.success("Event updated successfully");
     console.log("Event updated successfully");
+    window.location.href = "/my-events";
   } else {
     toast.error("Failed to update event");
     console.error("Failed to update event");

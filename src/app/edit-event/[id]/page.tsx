@@ -56,7 +56,7 @@ const EditEvent = async ({ params }: EditEventPageProps) => {
   };
 
   return (
-    <div>
+    <section className="container mt-4 p-5">
       <PageDescriptionHeader
         title="Edit Event"
         description="Update event details"
@@ -67,7 +67,7 @@ const EditEvent = async ({ params }: EditEventPageProps) => {
         buttonText="Update Event"
         eventId={id}
       />
-    </div>
+    </section>
   );
 };
 

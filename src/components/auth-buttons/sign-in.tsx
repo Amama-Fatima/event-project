@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import GradientButton from "../gradient-button";
+import { LogIn } from "lucide-react";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +37,13 @@ const SignIn = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Sign In</Button>
+        <GradientButton
+          spanClassName="px-4 rounded-md flex items-center space-x-2"
+          className="rounded-md"
+        >
+          <span>Sign In</span>
+          <LogIn />
+        </GradientButton>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -71,9 +78,15 @@ const SignIn = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={logIn}>
-            Sign In
-          </Button>
+          <GradientButton
+            type="submit"
+            onClick={logIn}
+            spanClassName="px-4 rounded-md flex items-center space-x-2"
+            className="rounded-md"
+          >
+            <span>Sign In</span>
+            <LogIn />
+          </GradientButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -1,45 +1,76 @@
 import { Event } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
 
+const TableHeaders = [
+  "Name",
+  "Date",
+  "Time",
+  "Location",
+  "Address",
+  "Organizer",
+  "Type",
+  "Actions",
+];
+
 const EventsTable = ({ events }: { events: Event[] }) => {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto rounded-lg border border-secondary">
       <table className="w-full text-sm">
-        <thead className="">
+        <thead className="bg-gray-900/50 border-b border-secondary">
           <tr>
-            <th className="px-4 py-3 text-left">Name</th>
-            <th className="px-4 py-3 text-left">Date</th>
-            <th className="px-4 py-3 text-left">Time</th>
-            <th className="px-4 py-3 text-left">Location</th>
-            <th className="px-4 py-3 text-left">Address</th>
-            <th className="px-4 py-3 text-left">Organizer</th>
-            <th className="px-4 py-3 text-left">Type</th>
-            <th className="px-4 py-3 text-left"></th>
+            {TableHeaders.map((header, i) => (
+              <th
+                key={i}
+                className="whitespace-nowrap px-6 py-4 text-left text-primary font-bold"
+              >
+                {header}
+              </th>
+            ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-200">
+        <tbody className="divide-y divide-gray-800">
           {events.map((event) => (
-            <tr key={event.id} className=" hover:bg-gray-800 bg-gray-900">
-              <td className="px-4 py-3 font-medium">{event.name}</td>
-              <td className="px-4 py-3">
-                {new Date(event.date).toLocaleDateString()}
+            <tr
+              key={event.id}
+              className="bg-gray-900 bg-opacity-50 backdrop-blur-sm transition-colors hover:bg-gray-800"
+            >
+              <td className="px-6 py-4">
+                <div className="font-medium text-gray-100">{event.name}</div>
               </td>
-              <td className="px-4 py-3">{event.time}</td>
-              <td className="px-4 py-3">{event.location}</td>
-              <td className="px-4 py-3">{event.address}</td>
-              <td className="px-4 py-3">{event.organizer_name}</td>
-              <td className="px-4 py-3">
-                <span className="px-2 py-1 text-xs rounded-full">
+              <td className="whitespace-nowrap px-6 py-4 text-gray-300">
+                {new Date(event.date).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </td>
+              <td className="whitespace-nowrap px-6 py-4 text-gray-300">
+                {event.time}
+              </td>
+              <td className="px-6 py-4 text-gray-300">{event.location}</td>
+              <td className="px-6 py-4 text-gray-300">{event.address}</td>
+              <td className="px-6 py-4">
+                <div className="text-gray-300">{event.organizer_name}</div>
+              </td>
+              <td className="px-6 py-4">
+                <span
+                  className={cn(
+                    "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+                    getEventTypeStyles(event.event_type)
+                  )}
+                >
                   {event.event_type}
                 </span>
               </td>
-              <td className="px-4 py-3">
+              <td className="px-6 py-4">
                 <Link
                   href={`/edit-event/${event.id}`}
-                  className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
+                  className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800 text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
                 >
-                  <Pencil size={16} />
+                  <Pencil size={14} />
+                  <span className="sr-only">Edit Event</span>
                 </Link>
               </td>
             </tr>
@@ -48,6 +79,22 @@ const EventsTable = ({ events }: { events: Event[] }) => {
       </table>
     </div>
   );
+};
+
+// Helper function to get event type badge styles
+const getEventTypeStyles = (eventType: string) => {
+  switch (eventType.toLowerCase()) {
+    case "conference":
+      return "bg-blue-400/10 text-blue-400";
+    case "workshop":
+      return "bg-purple-400/10 text-purple-400";
+    case "webinar":
+      return "bg-green-400/10 text-green-400";
+    case "meetup":
+      return "bg-yellow-400/10 text-yellow-400";
+    default:
+      return "bg-gray-400/10 text-gray-400";
+  }
 };
 
 export default EventsTable;

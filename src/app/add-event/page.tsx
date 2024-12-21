@@ -14,7 +14,7 @@ const AddEventPage = () => {
     event_type: "Conference",
   };
   return (
-    <section className="container mt-6 p-6">
+    <section className="container mt-4 p-5">
       <PageDescriptionHeader
         title="Add Event"
         description="Create an exciting new event!"

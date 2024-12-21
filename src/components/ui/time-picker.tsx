@@ -28,17 +28,28 @@ const formatTimeValue = (timeValue: TimeValue): string => {
 };
 
 interface TimePickerProps {
-  value: TimeValue;
+  h?: string;
+  m?: string;
+  p?: string;
+  // value: TimeValue;
   onChange: (value: string) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TimePicker = ({ value, onChange }: TimePickerProps) => {
-  const [hour, setHour] = useState<string>("");
-  const [minute, setMinute] = useState<string>("");
-  const [period, setPeriod] = useState<string>("");
+const TimePicker = ({
+  // value,
+  onChange,
+  h = "",
+  m = "",
+  p = "",
+}: TimePickerProps) => {
+  console.log("h, m, p are ", h, m, p);
+  const [hour, setHour] = useState<string>(h);
+  const [minute, setMinute] = useState<string>(m);
+  const [period, setPeriod] = useState<string>(p);
   // Generate hours (1-12)
-  const hours = Array.from({ length: 12 }, (_, i) => (i + 1).toString());
+  const hours = Array.from({ length: 12 }, (_, i) =>
+    (i + 1).toString().padStart(2, "0")
+  );
 
   useEffect(() => {
     const time = {
@@ -78,7 +89,6 @@ const TimePicker = ({ value, onChange }: TimePickerProps) => {
         <Select
           value={hour || ""}
           onValueChange={(newHour) => {
-            // onChange?.({ ...value, hour: newHour })
             setHour(newHour);
           }}
         >
@@ -88,7 +98,7 @@ const TimePicker = ({ value, onChange }: TimePickerProps) => {
           <SelectContent>
             {hours.map((hour) => (
               <SelectItem key={hour} value={hour}>
-                {hour.padStart(2, "0")}
+                {hour}
               </SelectItem>
             ))}
           </SelectContent>
